@@ -21,7 +21,7 @@ var map = new L.Map('map', {
             maxZoom: 14,
             minZoom: 0,
             continuousWorld: true,
-            attribution: 'Astun Data Service &copy; Ordnance Survey.'
+            attribution: 'Astun Data Service &copy; Ordnance Survey.',
         })]
 });
 
@@ -39,7 +39,19 @@ reqwest({
 }).then(function (data) {
     var planningAppsLayer = L.geoJson(data, {
         // -- Layer options here --
+
+        /// Define a function that will be called once for each feature that is
+        // added to the GeoJSON layer. Here we define a popup for each feature
+        onEachFeature: function addPopup (feature, marker) {
+            var tmplt = '<h2><a href="{caseurl}">{casereference}</a></h2>';
+            tmplt += '<p>{locationtext}</p><p>Status: {status} {statusdesc}</p>';
+            marker.bindPopup(L.Util.template(tmplt, feature.properties));
+        },
+
     }).addTo(map);
     // Zoom to the extent of all features
     map.fitBounds(planningAppsLayer.getBounds());
 });
+
+
+
