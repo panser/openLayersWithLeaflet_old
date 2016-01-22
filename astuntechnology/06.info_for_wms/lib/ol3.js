@@ -97,6 +97,8 @@ planningAppsSource.on('change', function (evt) {
 var popup = new ol.Overlay.Popup();
 map.addOverlay(popup);
 
+
+
 // Add an event handler for the map "singleclick" event
 map.on('singleclick', function(evt) {
 
@@ -104,7 +106,7 @@ map.on('singleclick', function(evt) {
     popup.hide();
     popup.setOffset([0, 0]);
 
-    // Attempt to find a feature in one of the visible vector layers
+    // Attempt to find a marker from the planningAppsLayer
     var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
         return feature;
     });
@@ -119,6 +121,30 @@ map.on('singleclick', function(evt) {
         // Offset the popup so it points at the middle of the marker not the tip
         popup.setOffset([0, -22]);
         popup.show(coord, info);
+
+    } else {
+
+        var url = districtLayer
+            .getSource()
+            .getGetFeatureInfoUrl(
+                evt.coordinate,
+                map.getView().getResolution(),
+                map.getView().getProjection(),
+                {
+                    'INFO_FORMAT': 'application/json',
+                    'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
+                }
+            );
+
+        reqwest({
+            url: url,
+            type: 'json',
+        }).then(function (data) {
+            var feature = data.features[0];
+            var props = feature.properties;
+            var info = "<h2>" + props.NAME + "</h2><p>" + props.DESCRIPTIO + "</p>";
+            popup.show(evt.coordinate, info);
+        });
 
     }
 
