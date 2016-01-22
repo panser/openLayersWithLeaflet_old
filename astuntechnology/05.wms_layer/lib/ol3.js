@@ -23,22 +23,6 @@ var tileGrid = new ol.tilegrid.TileGrid({
 
 var map = new ol.Map({
     target: 'map',
-    layers: [
-        new ol.layer.Tile({
-            source: new ol.source.TileWMS({
-                url: 'http://t0.ads.astuntechnology.com/open/osopen/service?',
-                attributions: [
-                    new ol.Attribution({html: 'Astun Data Service &copy; Ordnance Survey.'})
-                ],
-                params: {
-                    'LAYERS': 'osopen',
-                    'FORMAT': 'image/png',
-                    'TILED': true
-                },
-                tileGrid: tileGrid
-            })
-        })
-    ],
     view: new ol.View({
         projection: bng,
         resolutions: resolutions,
@@ -47,6 +31,24 @@ var map = new ol.Map({
     })
 });
 
+
+
+// -- Load GB disticts as a WMS layer --
+var districtLayer = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: 'http://t0.ads.astuntechnology.com/open/osopen/service?',
+        attributions: [
+            new ol.Attribution({html: 'Astun Data Service &copy; Ordnance Survey.'})
+        ],
+        params: {
+            'LAYERS': 'osopen',
+            'FORMAT': 'image/png',
+            'TILED': true
+        },
+        tileGrid: tileGrid
+    })
+});
+map.addLayer(districtLayer);
 
 
 

@@ -14,19 +14,20 @@ var map = new L.Map('map', {
     crs: crs,
     continuousWorld: true,
     worldCopyJump: false,
-    layers: [
-        L.tileLayer.wms('http://t0.ads.astuntechnology.com/open/osopen/service', {
-            layers: 'osopen',
-            format: 'image/png',
-            maxZoom: 14,
-            minZoom: 0,
-            continuousWorld: true,
-            attribution: 'Astun Data Service &copy; Ordnance Survey.',
-        })]
 });
 
 map.setView([52.5, -1.8], 0);
 
+
+
+var districtLayer = L.tileLayer.wms('http://t0.ads.astuntechnology.com/open/osopen/service', {
+    layers: 'osopen',
+    format: 'image/png',
+    maxZoom: 14,
+    minZoom: 0,
+    continuousWorld: true,
+    attribution: 'Astun Data Service &copy; Ordnance Survey.',
+}).addTo(map);
 
 
 // -- GeoJSON layer --
