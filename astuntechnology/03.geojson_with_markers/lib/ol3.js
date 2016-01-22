@@ -46,3 +46,43 @@ var map = new ol.Map({
         zoom: 0
     })
 });
+
+
+
+
+// -- GeoJSON layer --
+
+// Define a GeoJSON source that will load features via a http call. By
+// specifying the projection of the map's view OL3 will transform the coordinates
+// for display
+var planningAppsSource = new ol.source.Vector({
+    'projection': map.getView().getProjection(),
+    'url': 'http://digitalservices.surreyi.gov.uk/developmentcontrol/0.1/applications/search?status=live&gsscode=E07000214&status=live',
+    format: new ol.format.GeoJSON()
+});
+
+// Create a vector layer to display the features within the GeoJSON source and
+// applies a simple icon style to all features
+var planningAppsLayer = new ol.layer.Vector({
+    source: planningAppsSource,
+    style: new ol.style.Style({
+        image: new ol.style.Icon(({
+            anchor: [0.5, 40],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            src: 'static/marker-icon.png'
+        }))
+    })
+});
+
+// Add the layer to the map
+map.addLayer(planningAppsLayer);
+
+ //Once the change event of the source occurs and the source is 'ready' zoom to
+ //the extent of the features
+planningAppsSource.on('change', function (evt) {
+    var src = evt.target;
+    if (src.getState() === 'ready') {
+        map.getView().fit(src.getExtent(), map.getSize());
+    }
+});
