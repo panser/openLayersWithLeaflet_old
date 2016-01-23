@@ -6,5 +6,4 @@ var map = new L.Map('map', {
             format: 'image/png'
         })]
 });
-
 map.setView([62.5, 4.2], 5);

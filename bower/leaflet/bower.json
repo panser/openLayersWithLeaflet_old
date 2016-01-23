@@ -19,7 +19,8 @@
     "reqwest": "~2.0.5",
     "leaflet": "~0.7.7",
     "Proj4Leaflet": "proj4leaflet#~0.7.2",
-    "proj4": "~2.3.12"
+    "proj4": "~2.3.12",
+    "jQuery": "~2.2.0"
   },
   "resolutions": {
     "proj4": "~2.1.2"
