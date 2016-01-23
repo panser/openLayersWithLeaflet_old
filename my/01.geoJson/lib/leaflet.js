@@ -13,14 +13,17 @@ $(document).ready(function () {
 
 
     var geoLayer = new L.GeoJSON();
-    geoLayer.addTo(map);
-    var jqxhr = $.getJSON('../../data/geojson/test.geojson');
+    var jqxhr = $.getJSON('../../data/geojson/norway.geojson');
+    //var jqxhr = $.getJSON('../../data/geojson/test.geojson');
+    jqxhr.done(function(data){
+        geoLayer.addData(data);
+    });
 
     $('#jsonCheckBox').change(function () {
         if ($(this).is(":checked")) {
-            geoLayer.addData(jqxhr.responseJSON);
+            map.addLayer(geoLayer);
         } else {
-            geoLayer.removeData(jqxhr.responseJSON);
+            map.removeLayer(geoLayer);
         }
     });
 
