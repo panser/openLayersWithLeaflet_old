@@ -28,16 +28,19 @@ $(document).ready(function () {
     });
 
     var topoLayer = new L.TopoJSON();
-    topoLayer.addTo(map);
     var jqxhr = $.getJSON('../../data/topojson/world-110m.json');
     //var jqxhr = $.getJSON('../../data/topojson/test.topojson');
     //var jqxhr = $.getJSON('../../data/topojson/test_with_Features.topojson');
+    jqxhr.done(function(data){
+        topoLayer.addData(data);
+    });
+
 
     $('#jsonCheckBox').change(function () {
         if ($(this).is(":checked")) {
-            topoLayer.addData(jqxhr.responseJSON);
+            map.addLayer(topoLayer);
         } else {
-            topoLayer.removeData(jqxhr.responseJSON);
+            map.removeLayer(topoLayer);
         }
     });
 
