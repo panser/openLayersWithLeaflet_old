@@ -1,3 +1,4 @@
+'use strict';
 
 var map = new ol.Map({
     target: 'map',

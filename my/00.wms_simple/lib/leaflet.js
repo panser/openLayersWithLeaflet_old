@@ -1,3 +1,4 @@
+'use strict';
 
 var map = new L.Map('map', {
     layers: [
