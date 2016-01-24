@@ -9,7 +9,7 @@ var temperature = L.tileLayer.wms('http://opencache.statkart.no/gatekeeper/gk/gk
 }).addTo(map);
 
 
-var usLayer = omnivore.topojson('../../data/topojson/world-110m.json')
-//var usLayer = omnivore.topojson('../../data/topojson/test.topojson')
-//var usLayer = omnivore.topojson('../../data/topojson/test_with_Features.topojson')
+//var usLayer = omnivore.topojson('../../data/topojson/world-110m.json')
+var usLayer = omnivore.topojson('../../data/topojson/test.topojson')
+//var usLayer = omnivore.topojson('../../data/topojson/test_full.topojson')
     .addTo(map);

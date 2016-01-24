@@ -13,9 +13,9 @@ var map = new mapboxgl.Map({
 
 
 
-var jqxhr = $.getJSON('../../data/topojson/world-110m.json');
-//var jqxhr = $.getJSON('../../data/topojson/test.topojson');
-//var jqxhr = $.getJSON('../../data/topojson/test_with_Features.topojson');
+//var jqxhr = $.getJSON('../../data/topojson/world-110m.json');
+var jqxhr = $.getJSON('../../data/topojson/test.topojson');
+//var jqxhr = $.getJSON('../../data/topojson/test_full.topojson');
 map.on('style.load', function () {
 
     var source = new mapboxgl.GeoJSONSource({

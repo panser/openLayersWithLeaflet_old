@@ -23,9 +23,9 @@ $(document).ready(function () {
 
 
     var topoJsonSource = new ol.source.Vector({
-        //url: '../../data/topojson/test.topojson',
-        //url: '../../data/topojson/test_with_Features.topojson',
-        url: '../../data/topojson/world-110m.json',
+        url: '../../data/topojson/test.topojson',
+        //url: '../../data/topojson/test_full.topojson',
+        //url: '../../data/topojson/world-110m.json',
         format: new ol.format.TopoJSON()
     });
     var topoJsonTile = new ol.layer.Vector({
