@@ -2,41 +2,67 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicGFuc2VyIiwiYSI6ImNpanJtcWRubDAwYTB2bG03YWQ3MjcwZW0ifQ.Jxy8Jgl2jTqK1KluRyBeBg';
 
-//var map = L.mapbox.map('map').setView([62.5, 4.2], 5);
-//var temperature = L.tileLayer.wms('http://opencache.statkart.no/gatekeeper/gk/gk.open?', {
-//    layers: 'topo2',
-//    format: 'image/png'
-//}).addTo(map);
-
-
+//var simple = {
+//    "version": 8,
+//    "sources": {
+//        "osm": {
+//            "type": "raster",
+//            "tiles": ["http://opencache.statkart.no/gatekeeper/gk/gk.open?"]
+//        }
+//    },
+//    "layers": [
+//        {
+//            "id": "background",
+//            "type": "background",
+//            "paint": {
+//                "background-color": "#41afa5"
+//            }
+//        }
+//    ]
+//};
 
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/panser/cijs7ihlp007tcakwtkq1ryjo',
-    //style: 'mapbox://styles/mapbox/light-v8',
+    //style: 'mapbox://styles/panser/cijs7ihlp007tcakwtkq1ryjo',
+    style: 'mapbox://styles/mapbox/light-v8',
+    //style: simple,
     zoom: 5,
     center: [20, 60]
 });
 
 map.on('style.load', function () {
-    map.addSource('panser.cwzqt7d9', {
+    map.addSource('bigLayer', {
         type: 'vector',
         //url: 'mapbox://panser.cwzqt7d9'
-        url: 'mapbox://mapbox.mapbox-terrain-v2'
+        //url: 'mapbox://panser.0j57t0mg'
+        url: 'mapbox://panser.cvu9mmxu'
     });
-    //map.addLayer({
-    //    "id": "panser.cwzqt7d9",
-    //    "type": "line",
-    //    "source": "panser.cwzqt7d9",
-    //    "source-layer": "contour",
-    //    "layout": {
-    //        "line-join": "round",
-    //        "line-cap": "round"
-    //    },
-    //    "paint": {
-    //        "line-color": "#ff69b4",
-    //        "line-width": 1
-    //    }
-    //});
+    map.addLayer({
+        "id": "bigLayer",
+        "type": "line",
+        "source": "bigLayer",
+        //"source-layer": "adm_enheter_norge_kommunegrense_kurve",
+        "source-layer": "original",
+        "layout": {
+            "line-join": "round",
+            "line-cap": "round"
+        },
+        "paint": {
+            "line-color": "#888",
+            "line-width": 8
+        }
+    });
+
+    map.setLayoutProperty('bigLayer', 'visibility', 'none');
+
 });
+
+$('#jsonCheckBox').change(function () {
+    if ($(this).is(":checked")) {
+        map.setLayoutProperty('bigLayer', 'visibility', 'visible');
+    } else {
+        map.setLayoutProperty('bigLayer', 'visibility', 'none');
+    }
+});
+
 
