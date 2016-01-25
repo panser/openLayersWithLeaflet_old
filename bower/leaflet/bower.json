@@ -20,7 +20,8 @@
     "leaflet": "~0.7.7",
     "Proj4Leaflet": "proj4leaflet#~0.7.2",
     "proj4": "~2.3.12",
-    "jQuery": "~2.2.0"
+    "jQuery": "~2.2.0",
+    "mapbox-gl-leaflet": "https://github.com/mapbox/mapbox-gl-leaflet.git#~0.0.1"
   },
   "resolutions": {
     "proj4": "~2.1.2"
